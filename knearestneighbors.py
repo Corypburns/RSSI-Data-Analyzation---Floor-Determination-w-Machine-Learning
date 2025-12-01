@@ -1,0 +1,72 @@
+import pandas as pd, time as t, numpy as np, joblib as jl
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+
+def train():
+    # Load dataset & Drop Nonsense
+    df = pd.read_csv("Train/trainingData.csv")
+    df.dropna()
+
+
+
+    X = df.iloc[:, 0:520]
+    y = df["FLOOR"]
+
+    # Train a Naive Bayes classifier (10 neighbors perform the best)
+    model = KNeighborsClassifier(n_neighbors=10, weights="distance")
+    model.fit(X, y)
+
+
+
+    jl.dump(model, "Trained_Models/KNearestNeighbor.joblib")
+    
+def test():
+    df = pd.read_csv("Test/validationData.csv")
+    df.dropna()
+    
+    X = df.iloc[:, 0:520]
+    y = df["FLOOR"]
+    
+    model = jl.load("Trained_Models/KNearestNeighbor.joblib")
+    
+    test = model.predict(X)
+    probability = model.predict_proba(X)
+    confidence = np.max(probability, axis=1)
+    overall_accuracy = accuracy_score(y, test)
+    
+    
+    try:
+        for i, (pred, actual, conf) in enumerate(zip(test, y, confidence), start=1):
+            print(f"Prediction {i}: {pred}\n"
+                f"Actual: {actual}\n"
+                f"Confidence: {conf:.2%}\n")
+            t.sleep(1)
+    except:
+        None
+    finally:
+        print(f"\nOverall Accuracy: {overall_accuracy:.2%}")
+    
+    
+def menu():
+    choice = int(input(
+          "\n1. Train\n"
+          "2. Test\n"
+          "3. Quit\n"
+          "\n-> "))
+    
+    match choice:
+        case 1:
+            train()
+        case 2:
+            test()
+        case 3:
+            exit()
+        case _:
+            print("Error. Quitting program")
+            exit()
+            
+def main():
+    menu()
+    
+if __name__ == "__main__":
+    main()

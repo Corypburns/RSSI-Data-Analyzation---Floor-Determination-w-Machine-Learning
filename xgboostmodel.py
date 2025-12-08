@@ -18,7 +18,7 @@ def train():
     y = df["FLOOR"]
 
     # Train a XGBoost classifier (Tried with 2000 estimators after 1100, performed the same; 1100 is an 89.20% accuracy)
-    model = xgb(n_estimators=1100, max_depth=6)
+    model = xgb(n_estimators=500, max_depth=6)
     model.fit(X, y)
 
 

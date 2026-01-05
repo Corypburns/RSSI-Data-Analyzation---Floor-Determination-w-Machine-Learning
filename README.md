@@ -14,6 +14,9 @@ If you are interested in trying this out for yourself, you may do so by all mean
 # <ins>USING A DIFFERENT DATASET</ins>
 Here are some things that need to be changed to make the model work with your specified dataset. You need to change the *X* variable as well as the *y* variable, as *X* pertains to the columns, or feature groups, while *y* pertains to the value that the model is trying to predict. Change these values as you see fit in relation to the dataset that you are using; this will **NOT** work if the values are not the same as your desired dataset the declaration *y = df["FLOOR"]*, for example, refers to the column "FLOOR" within the ujindoorloc dataset, the column that the model is predicting; we make separate variables because if *X* <ins>also</ins> contained "FLOOR", then the model would get perfect results because it knows the answer to what it is trying to predict already. In other words, that would make this process pointless.
 
+# <ins>PARAMETERS TO CHANGE</ins>
+The most prudent changes to make are increasing things like *k* within the K Nearest Neighbors model and *n_estimators* within the XGBoost model. As for Naive Bayes, that seems to be one of its shortcomings; the model has little to no hyper parameters to tweak the model. What you can do, however, is change the model type. Naive Bayes has three different classification methods: Gaussian, Multinomial, and Bernoulli. We used gaussian because the data in this case is continuous, which means that the RSSI values follow a range of numbers that can be obtained. Multinomial refers the the number of times *something* has occured i.e. a counter of something that comes up in a dataset. Bernoulli operates on a yes/no basis which is not useful for the data here.
+
 # <ins>MY RESULTS</ins>
 The results obtained are as follows:
 

@@ -17,8 +17,8 @@ Here are some things that need to be changed to make the model work with your sp
 # <ins>MY RESULTS</ins>
 The results obtained are as follows:
 
-**XGBoost - ** 88.30% <br>
-**K Nearest Neighbor - ** 74.17%
-**Naive Bayes - ** 44.37%
+**XGBoost -** 88.30% <br>
+**K Nearest Neighbor -** 74.17% <br>
+**Naive Bayes -** 44.37% <br>
 
 These can **DEFINITELY** be improved upon through various hyperparameter tweaks and changes.
